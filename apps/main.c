@@ -17,19 +17,26 @@ void print_menu() {
     printf("Choose option: ");
 }
 
+void clear_stdin() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {}
+}
+
 double read_double(const char *prompt) {
     double value;
     int result;
 
-    while (true) {
+    while (1) {
         printf("%s", prompt);
         result = scanf("%lf", &value);
 
         if (result == 1) {
+            clear_stdin();
             return value;
         }
 
         printf("Error: please enter a valid number.\n");
+        clear_stdin();
     }
 }
 
@@ -37,20 +44,22 @@ int read_int(const char *prompt) {
     int value;
     int result;
 
-    while (true) {
+    while (1) {
         printf("%s", prompt);
         result = scanf("%d", &value);
 
         if (result == 1) {
+            clear_stdin();
             return value;
         }
 
         printf("Error: please enter a valid integer.\n");
+        clear_stdin();
     }
 }
 
 int main() {
-    while(true) {
+    while(1) {
         print_menu();
         int option = read_int("");
 
@@ -63,47 +72,35 @@ int main() {
             case 1: {
                 double a = read_double("Enter a: ");
                 double b = read_double("Enter b: ");
+                calc_add(a, b);
                 break;
             }
             case 2: {
                 double a = read_double("Enter a: ");
                 double b = read_double("Enter b: ");
+                calc_sub(a, b);
                 break;
             }
             case 3: {
                 double a = read_double("Enter a: ");
                 double b = read_double("Enter b: ");
+                calc_mul(a, b);
                 break;
             }
             case 4: {
                 double a = read_double("Enter a: ");
                 double b = read_double("Enter b: ");
-                if (b == 0.) {
-                    pritnf("B cant be equal 0\n");
-                }
-                else {
-                
-                }
+                calc_div(a, b);
                 break;
             }
             case 5: {
                 int n = read_int("Enter int n >= 0: ");
-                if (n < 0) {
-                    preintf("N should be greater than 0\n");
-                }
-                else {
-
-                }
+                calc_factorial(n);
                 break;
             }
             case 6: {
                 double x = read_double("Enter double x >= 0: ");
-                if (x < 0.) {
-                    preintf("N should be greater than 0\n");
-                }
-                else {
-
-                }
+                calc_sqrt(x);
                 break;
             }
             default: {
