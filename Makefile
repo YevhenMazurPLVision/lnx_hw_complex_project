@@ -3,8 +3,6 @@ CFLAGS  = -Wall -Wextra -Werror -Iinclude
 LIBDIR  = lib
 BUILDDIR = build
 
-$(BUILDDIR):
-	mkdir -p $(BUILDDIR)
 
 CALC_SRC    = src/calc/add_sub_mul_div.c src/calc/factorial.c src/calc/sqrt.c
 # .c -> .o і додаємо префікс build/ => build/src/calc/...
@@ -18,6 +16,9 @@ CONVERT_OBJ = $(addprefix $(BUILDDIR)/, $(CONVERT_SRC:.c=.o))
 all: calc upper lower
 task1: calc
 task2: upper lower
+
+$(BUILDDIR):
+	mkdir -p $(BUILDDIR)
 
 calc: apps/calc
 upper: apps/upper
