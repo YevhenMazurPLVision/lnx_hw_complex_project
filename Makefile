@@ -20,9 +20,9 @@ task2: upper lower
 $(BUILDDIR):
 	mkdir -p $(BUILDDIR)
 
-calc: apps/calc
-upper: apps/upper
-lower: apps/lower
+calc: build/calc
+upper: build/upper
+lower: build/lower
 
 install_convert: $(LIBDIR)/libconvert.so
 	sudo cp $(LIBDIR)/libconvert.so /usr/local/lib/
@@ -35,7 +35,7 @@ $(LIBDIR):
 clean:
 	rm -rf $(BUILDDIR)
 	rm -f $(LIBDIR)/libcalc.a $(LIBDIR)/libconvert.so
-	rm -f apps/calc apps/upper apps/lower
+	rm -f build/calc build/upper build/lower
 	rm -f src/calc/*.o src/convert/*.o
 
 clean-task1: clean-calc
@@ -47,25 +47,25 @@ clean-task2: clean-upper clean-lower
 	rm -rf $(BUILDDIR)/src/convert
 
 clean-calc:
-	rm -f apps/calc
+	rm -f build/calc
 
 clean-upper:
-	rm -f apps/upper
+	rm -f build/upper
 
 clean-lower:
-	rm -f apps/lower
+	rm -f build/lower
 
 uninstall_convert:
 	sudo rm -f /usr/local/lib/libconvert.so
 	sudo ldconfig
 
-apps/calc: apps/main.c $(LIBDIR)/libcalc.a
+build/calc: apps/main.c $(LIBDIR)/libcalc.a
 	$(CC) $(CFLAGS) $< -L$(LIBDIR) -lcalc -lm -o $@
 
-apps/upper: apps/upper.c $(LIBDIR)/libconvert.so
+build/upper: apps/upper.c $(LIBDIR)/libconvert.so
 	$(CC) $(CFLAGS) $< -L$(LIBDIR) -lconvert -o $@
 
-apps/lower: apps/lower.c $(LIBDIR)/libconvert.so
+build/lower: apps/lower.c $(LIBDIR)/libconvert.so
 	$(CC) $(CFLAGS) $< -L$(LIBDIR) -lconvert -o $@
 
 $(LIBDIR)/libcalc.a: $(CALC_OBJ) | $(LIBDIR)
