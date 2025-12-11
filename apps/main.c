@@ -61,44 +61,44 @@ int read_int(const char *prompt) {
 int main() {
     while(1) {
         print_menu();
-        int option = read_int("");
+        MenuOption option = read_int("");
 
-        if (option == 0) {
+        if (option == OPTION_EXIT) {
             printf("Programe has finished!\n");
             break;
         }
 
         switch(option) {
-            case 1: {
+            case OPTION_ADD: {
                 double a = read_double("Enter a: ");
                 double b = read_double("Enter b: ");
                 calc_add(a, b);
                 break;
             }
-            case 2: {
+            case OPTION_SUB: {
                 double a = read_double("Enter a: ");
                 double b = read_double("Enter b: ");
                 calc_sub(a, b);
                 break;
             }
-            case 3: {
+            case OPTION_MUL: {
                 double a = read_double("Enter a: ");
                 double b = read_double("Enter b: ");
                 calc_mul(a, b);
                 break;
             }
-            case 4: {
+            case OPTION_DIV: {
                 double a = read_double("Enter a: ");
                 double b = read_double("Enter b: ");
                 calc_div(a, b);
                 break;
             }
-            case 5: {
+            case OPTION_FACTORIAL: {
                 int n = read_int("Enter int n >= 0: ");
                 calc_factorial(n);
                 break;
             }
-            case 6: {
+            case OPTION_SQRT: {
                 double x = read_double("Enter double x >= 0: ");
                 calc_sqrt(x);
                 break;
