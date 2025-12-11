@@ -1,6 +1,6 @@
 CC      = gcc
 CFLAGS  = -Wall -Wextra -Werror -Iinclude
-LIBDIR  = lib
+LIBDIR  = $(BUILDDIR)/lib
 BUILDDIR = build
 
 
