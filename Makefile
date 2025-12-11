@@ -13,7 +13,7 @@ CALC_OBJ    = $(addprefix $(BUILDDIR)/, $(CALC_SRC:.c=.o))
 CONVERT_SRC = src/convert/convert.c
 CONVERT_OBJ = $(addprefix $(BUILDDIR)/, $(CONVERT_SRC:.c=.o))
 
-.PHONY: all task1 task2 install_convert clean uninstall_convert
+.PHONY: all task1 task2 install_convert clean clean-task1 clean-calc clean-task2 clean-upper clean-lower uninstall_convert
 
 all: calc upper lower
 task1: calc
@@ -36,6 +36,23 @@ clean:
 	rm -f $(LIBDIR)/libcalc.a $(LIBDIR)/libconvert.so
 	rm -f apps/calc apps/upper apps/lower
 	rm -f src/calc/*.o src/convert/*.o
+
+clean-task1: clean-calc
+	rm -f $(LIBDIR)/libcalc.a
+	rm -rf $(BUILDDIR)/src/calc
+
+clean-task2: clean-upper clean-lower
+	rm -f $(LIBDIR)/libconvert.so
+	rm -rf $(BUILDDIR)/src/convert
+
+clean-calc:
+	rm -f apps/calc
+
+clean-upper:
+	rm -f apps/upper
+
+clean-lower:
+	rm -f apps/lower
 
 uninstall_convert:
 	sudo rm -f /usr/local/lib/libconvert.so
